@@ -16,19 +16,15 @@ def find_answer_p1(input_file: str) -> int:
 def find_answer_p2(input_file: str) -> int:
     total = 0
     with open(input_file) as raw_instructions:
-        full_line = ""
-        for line in raw_instructions.readlines():
-            full_line += line.strip()
-    found_last_dont = False
+        full_line = raw_instructions.read()
     next_dont_index = full_line.find("don't()")
     next_do_index = 0
-    while found_last_dont == False:
+    while True:
         if next_dont_index == -1:
             total += sum(
                 int(ex[0]) * int(ex[1])
                 for ex in re.findall(find_digit_regex, full_line[next_do_index:])
             )
-            found_last_dont = True
             break
         total += sum(
             int(ex[0]) * int(ex[1])
