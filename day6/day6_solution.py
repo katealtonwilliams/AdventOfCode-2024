@@ -26,8 +26,7 @@ def pos_is_in_grid(pos: tuple[int], grid: np.ndarray) -> int:
     return True
 
 
-def get_full_route(input_file: str) -> int:
-    map_grid = read_in_map(input_file)
+def get_full_route(map_grid: str) -> int:
     current_pos = np.where(map_grid == "^")[0][0], np.where(map_grid == "^")[1][0]
     current_direction = (-1, 0)
     visited_pos = set()
@@ -47,7 +46,12 @@ def get_full_route(input_file: str) -> int:
             )
         current_pos = next_pos
         visited_pos.add(current_pos)
-    return len(visited_pos)
+    return visited_pos
+
+
+def count_distinct_pos(input_file: str) -> int:
+    map_grid = read_in_map(input_file)
+    return len(get_full_route(map_grid))
 
 
 def find_next_pivot_point(
@@ -118,15 +122,13 @@ def creates_infinite_loop(map_grid: np.ndarray, block_position: tuple[int]) -> i
 def find_infinite_loops(input_file: str) -> int:
     map_grid = read_in_map(input_file)
     infinite_loops_count = 0
-    for row_index, row in enumerate(map_grid):
-        for col_index, item in enumerate(row):
-            if item != "#" and item != "^":
-                infinite_loops_count += creates_infinite_loop(
-                    map_grid, (row_index, col_index)
-                )
+    for pos in get_full_route(map_grid):
+        item = map_grid[pos]
+        if item != "#" and item != "^":
+            infinite_loops_count += creates_infinite_loop(map_grid, (pos[0], pos[1]))
     return infinite_loops_count
 
 
 if __name__ == "__main__":
-    print(get_full_route("day6/day6_final_input.txt"))
+    print(count_distinct_pos("day6/day6_final_input.txt"))
     print(find_infinite_loops("day6/day6_final_input.txt"))
