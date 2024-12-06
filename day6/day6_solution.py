@@ -124,7 +124,7 @@ def find_infinite_loops(input_file: str) -> int:
     infinite_loops_count = 0
     for pos in get_full_route(map_grid):
         item = map_grid[pos]
-        if item != "#" and item != "^":
+        if item != "^":
             infinite_loops_count += creates_infinite_loop(map_grid, (pos[0], pos[1]))
     return infinite_loops_count
 
