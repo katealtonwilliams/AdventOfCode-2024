@@ -43,7 +43,7 @@ def find_correct_equations_p2(input_file: str) -> int:
                 if remaining == 0:
                     total_calibration_result += answer
                     break
-            current_equation = int(answer - remaining)
+            current_equation = answer - remaining
             if next_index < len(numbers_to_check):
                 check = numbers_to_check[next_index]
                 if (next_equation := current_equation + check) <= answer:
