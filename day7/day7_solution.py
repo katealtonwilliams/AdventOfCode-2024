@@ -1,6 +1,4 @@
 import heapq
-from aled import aled_list
-
 
 def read_in_equations(input_file: str) -> dict[int : list[int]]:
     with open(input_file) as raw_equations:
