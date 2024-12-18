@@ -197,4 +197,5 @@ def calculate_answer_p2(input_file: str) -> int:
 
 if __name__ == "__main__":
     print(calculate_answer_p1("day12/day12_final_input.txt"))
+    # come back and optimise part 2!
     print(calculate_answer_p2("day12/day12_final_input.txt"))
